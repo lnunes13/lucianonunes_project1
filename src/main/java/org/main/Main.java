@@ -1,3 +1,7 @@
+/**
+ * This is the main package.
+ */
+
 // Course: COMP490 - Software Development and Design
 // Student: Luciano Nunes
 // Professor: John Santore
@@ -5,9 +9,6 @@
 // Purpose & Description: The purpose of this assignment is to
 //      implement a decipher to convert baby language to arithmetic expressions
 
-/**
- * This is the main package.
- */
 package org.main;
 
 import java.io.BufferedInputStream;
@@ -91,7 +92,6 @@ public final class Main {
                     System.out.println(recognizer.getPartialResult());
                 }
             }
-
             System.out.println(recognizer.getFinalResult());
         }
     }

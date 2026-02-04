@@ -6,6 +6,7 @@
     <copyLibs>true</copyLibs>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
+      <option value="bundled-google-checks" />
       <option value="bundled-sun-checks" />
     </option>
     <option name="locations">
