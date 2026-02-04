@@ -1,6 +1,12 @@
+// Course: COMP490 - Software Development and Design
+// Student: Luciano Nunes
+// Professor: John Santore
+// Assignment: Sprint 1 - Speech to Text project
+// Purpose & Description: The purpose of this assignment is to
+//      implement a decipher to convert baby language to arithmetic expressions
+
 package tests;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.vosk.LibVosk;
 import org.vosk.LogLevel;
