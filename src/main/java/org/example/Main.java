@@ -5,10 +5,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import org.vosk.LogLevel;
 import org.vosk.Recognizer;
 import org.vosk.LibVosk;
@@ -46,7 +44,7 @@ public class Main {
 
         try (Model model = new Model("vosk-model-en-us-0.22");
              InputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream("recording_buffer.wav")));
-             Recognizer recognizer = new Recognizer(model, 16000)) {
+             Recognizer recognizer = new Recognizer(model, 48000)) {
 
             int nbytes;
             byte[] b = new byte[4096];

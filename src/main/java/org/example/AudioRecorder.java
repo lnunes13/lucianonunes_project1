@@ -17,7 +17,7 @@ public class AudioRecorder {
     TargetDataLine line;
 
     public AudioRecorder() {
-        float sampleRate = 16000;
+        float sampleRate = 48000;
         int sampleSizeInBits = 16;
         int channels = 2;
         boolean signed = true;
