@@ -30,4 +30,4 @@ jobs:
     - name: Build with Maven and run Tests
       run: mvn --batch-mode --update-snapshots verify
     - name: Run Checkstyle linter
-      run: mvn -B checkstyle:check
+      run: mvn --batch-mode checkstyle:checkstyle
