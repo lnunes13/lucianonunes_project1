@@ -1,14 +1,13 @@
-/**
- * This is the main package.
- */
-
 // Course: COMP490 - Software Development and Design
 // Student: Luciano Nunes
 // Professor: John Santore
 // Assignment: Sprint 1 - Speech to Text project
-// Purpose & Description: The purpose of this assignment is to
-//      implement a decipher to convert baby language to arithmetic expressions
+// Purpose & Description: Implement recording of a speech to text
+//    model that records microphone audio and converts it to text.
 
+/**
+ * This is the main package.
+ */
 package org.main;
 
 import java.io.BufferedInputStream;
