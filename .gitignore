@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 recording_buffer.wav
 vosk-model-en-us-0.22
+vosk-model-small-en-us-0.15
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
