@@ -39,4 +39,4 @@ jobs:
       - name: Run Checkstyle linter
         run: mvn --batch-mode checkstyle:checkstyle
       - name: Run Tests
-        run: mvn test -Dtest=Test
+        run: mvn test -Dtest=MyTest
