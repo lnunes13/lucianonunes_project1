@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Set up unzip
-      run: apt-get install unzip 
+      run: sudo apt-get install unzip
     - name: Download Vosk AI model
       run: wget "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"
     - name: Unzip model
