@@ -18,6 +18,10 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.vosk.LogLevel;
 import org.vosk.Recognizer;
 import org.vosk.LibVosk;

@@ -7,6 +7,7 @@
 
 package tests;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.vosk.LibVosk;
 import org.vosk.LogLevel;
@@ -32,14 +33,11 @@ public class MyTest {
             int nbytes;
             byte[] b = new byte[4096];
             while ((nbytes = ais.read(b)) >= 0) {
-                if (recognizer.acceptWaveForm(b, nbytes)) {
-                    System.out.println(recognizer.getResult());
-                } else {
-                    System.out.println(recognizer.getPartialResult());
-                }
+                recognizer.acceptWaveForm(b, nbytes);
             }
 
-            System.out.println(recognizer.getFinalResult());
+            JSONObject jsonObject = new JSONObject(recognizer.getFinalResult());
+            System.out.println(jsonObject.getString("text"));
         }
     }
 }
