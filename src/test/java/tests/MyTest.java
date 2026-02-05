@@ -27,7 +27,8 @@ public class MyTest {
         LibVosk.setLogLevel(LogLevel.DEBUG);
 
         try (Model model = new Model("vosk-model-en-us-0.22");
-             InputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream("src/test/test_audio_sample.wav")));
+             InputStream ais = AudioSystem.getAudioInputStream(
+                     new BufferedInputStream(new FileInputStream("src/test/test_audio_sample.wav")));
              Recognizer recognizer = new Recognizer(model, 8000)) {
 
             int nbytes;

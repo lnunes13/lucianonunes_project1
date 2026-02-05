@@ -33,7 +33,7 @@ jobs:
       - name: Download Vosk AI model
         run: wget "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
       - name: Unzip model
-        run: unzip vosk-model-en-us-0.22.zip -d vosk-model-en-us-0.22
+        run: unzip vosk-model-en-us-0.22.zip
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
       - name: Run Checkstyle linter
