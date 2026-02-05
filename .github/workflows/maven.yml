@@ -22,16 +22,16 @@ jobs:
     steps:
     - name: Build with Maven
     - uses: actions/checkout@v4
-    - name: Download Vosk AI model
-      run: wget "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
-    - name: Unzip model
-      run: unzip vosk-model-en-us-0.22.zip -d vosk-model-en-us-0.22
     - name: Set up JDK 25
       uses: actions/setup-java@v4
       with:
         java-version: '25'
         distribution: 'temurin'
         cache: maven
+    - name: Download Vosk AI model
+      run: wget "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
+    - name: Unzip model
+      run: unzip vosk-model-en-us-0.22.zip -d vosk-model-en-us-0.22
       run: mvn verify
     - name: Run Checkstyle linter
       run: mvn --batch-mode checkstyle:checkstyle
