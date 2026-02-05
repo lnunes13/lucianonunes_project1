@@ -26,8 +26,8 @@ public class MyTest {
     public void testModel() throws IOException, UnsupportedAudioFileException {
         LibVosk.setLogLevel(LogLevel.DEBUG);
 
-        try (Model model = new Model("vosk-model-small-en-us-0.15");
-             InputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream("test_audio_sample.wav")));
+        try (Model model = new Model("vosk-model-en-us-0.22");
+             InputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream("src/test/test_audio_sample.wav")));
              Recognizer recognizer = new Recognizer(model, 8000)) {
 
             int nbytes;
