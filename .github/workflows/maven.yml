@@ -1,3 +1,4 @@
+
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
@@ -20,20 +21,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Build with Maven
-    - uses: actions/checkout@v4
-    - name: Set up JDK 25
-      uses: actions/setup-java@v4
-      with:
-        java-version: '25'
-        distribution: 'temurin'
-        cache: maven
-    - name: Download Vosk AI model
-      run: wget "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
-    - name: Unzip model
-      run: unzip vosk-model-en-us-0.22.zip -d vosk-model-en-us-0.22
-      run: mvn verify
-    - name: Run Checkstyle linter
-      run: mvn --batch-mode checkstyle:checkstyle
-    - name: Run Tests
-      run: mvn test -Dtest=Test
+      - uses: actions/checkout@v4
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: maven
+      - name: Set up unzip
+        run: sudo apt-get install unzip
+      - name: Download Vosk AI model
+        run: wget "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
+      - name: Unzip model
+        run: unzip vosk-model-en-us-0.22.zip -d vosk-model-en-us-0.22
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots verify
+      - name: Run Checkstyle linter
+        run: mvn --batch-mode checkstyle:checkstyle
+      - name: Run Tests
+        run: mvn test -Dtest=Test
