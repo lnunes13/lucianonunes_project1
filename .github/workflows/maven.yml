@@ -27,10 +27,15 @@ jobs:
         java-version: '25'
         distribution: 'temurin'
         cache: maven
+    - name: Set up unzip
+      run: apt-get install unzip 
+    - name: Download Vosk AI model
+      run: wget "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"
+    - name: Unzip model
+      run: unzip vosk-model-small-en-us-0.15.zip -d vosk-model-small-en-us-0.15
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots verify
     - name: Run Checkstyle linter
       run: mvn --batch-mode checkstyle:checkstyle
     - name: Run Tests
       run: mvn test -Dtest=Test
-
