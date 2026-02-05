@@ -7,6 +7,7 @@
 
 package tests;
 
+import org.junit.jupiter.api.Test;
 import org.vosk.LibVosk;
 import org.vosk.LogLevel;
 import org.vosk.Model;
@@ -19,8 +20,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Test {
-    @org.junit.Test
+public class MyTest {
+    @Test
     public void testModel() throws IOException, UnsupportedAudioFileException {
         LibVosk.setLogLevel(LogLevel.DEBUG);
 
