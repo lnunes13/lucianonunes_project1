@@ -29,11 +29,11 @@ public class AudioRecorder {
     /** API for microphone line. */
     private TargetDataLine line;
     /** Microphone sample rate. */
-    private final float sampleRate = 48000;
+    private final float sampleRate = 8000;
     /** Microphone sample rate size. */
     private final int sampleSizeInBits = 16;
     /** Microphone number of channels. */
-    private final int channels = 2;
+    private final int channels = 1;
     /** Microphone format option. */
     private final boolean signed = true;
     /** Microphone format option. */

@@ -11,24 +11,24 @@
 package org.main;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import org.vosk.LogLevel;
+import org.json.JSONObject;
 import org.vosk.Recognizer;
-import org.vosk.LibVosk;
 import org.vosk.Model;
 
 public final class Main {
     /** Delay to prevent thread from consuming. */
     public static final int SLEEP_DELAY = 100;
     /** Microphone bit rate to be configured. */
-    public static final int SAMPLE_RATE = 48000;
+    public static final int SAMPLE_RATE = 8000;
     /** Buffersize for recognizer. */
     public static final int BUFFER_SIZE = 4096;
 
@@ -50,10 +50,7 @@ public final class Main {
         // used to require user to press enter
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Press ENTER to start recording...");
-        scanner.nextLine();
-
-        // Thread for recording sound
+        // Thread for stopping recording after user presses enter
         Thread stopper = new Thread(new Runnable() {
             public void run() {
                 try {
@@ -67,32 +64,48 @@ public final class Main {
             }
         });
 
+        // prompt user to press ENTER
+        System.out.println("Press ENTER to start recording...");
+        scanner.nextLine();
+
         // start recording
         stopper.start();
         System.out.println("Recording started,");
         System.out.println("Press ENTER to stop recording...");
-        // stop recording
         recorder.startRecording();
 
-        // Run AI model to convert speech to text
-        LibVosk.setLogLevel(LogLevel.DEBUG);
+        // Transcribe audio to text
+        String transcribedText = voskTranscribeAudio("recording_buffer.wav");
 
+        // Write text to file and save
+        BufferedWriter writer = new BufferedWriter(
+                new FileWriter("recorded_text.txt"));
+        System.out.println("Transcribed text: " + transcribedText);
+        writer.write(transcribedText);
+        writer.close();
+    }
+
+    /**
+     * Transcribes a given audio file to text.
+     *
+     * @param filepath path of the audio file.
+     * @return transcribed text as a string.
+     */
+    public static String voskTranscribeAudio(final String filepath)
+            throws IOException, UnsupportedAudioFileException {
         try (Model model = new Model("vosk-model-en-us-0.22");
              InputStream ais = AudioSystem.getAudioInputStream(
-                     new BufferedInputStream(Files.newInputStream(
-                             Paths.get("recording_buffer.wav"))));
+                     new BufferedInputStream(new FileInputStream(filepath)));
              Recognizer recognizer = new Recognizer(model, SAMPLE_RATE)) {
 
+            // Use model to process audio
             int nbytes;
             byte[] b = new byte[BUFFER_SIZE];
             while ((nbytes = ais.read(b)) >= 0) {
-                if (recognizer.acceptWaveForm(b, nbytes)) {
-                    System.out.println(recognizer.getResult());
-                } else {
-                    System.out.println(recognizer.getPartialResult());
-                }
+                recognizer.acceptWaveForm(b, nbytes);
             }
-            System.out.println(recognizer.getFinalResult());
+            JSONObject jsonObject = new JSONObject(recognizer.getFinalResult());
+            return jsonObject.getString("text");
         }
     }
 }
